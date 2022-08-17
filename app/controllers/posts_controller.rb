@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
   def index; end
 
-  def show; end
+  def show
+    @post = Post.find(params[:id])
+  end
 
   def new
     @post = Post.new
@@ -18,5 +20,9 @@ class PostsController < ApplicationController
 
   def destroy; end
 
-  params.require(:post).permit(:title, :content)
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :content)
+  end
 end
