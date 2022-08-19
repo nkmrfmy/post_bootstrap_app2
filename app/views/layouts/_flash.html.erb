@@ -1,0 +1,5 @@
+<% flash.each do |flash_type, msg| %>
+  <!--下記記述で notice の場合と alert の場合で色分けができる-->
+  <p style="color: <%= flash_type == "notice" ? "green" : "red" %>;"><%= msg %></p>
+  <hr>
+<% end %>

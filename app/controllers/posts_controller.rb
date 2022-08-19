@@ -14,19 +14,20 @@ class PostsController < ApplicationController
 
   def create
     post = Post.create!(post_params)
-    redirect_to post_path(post)
+    # notice: "投稿しました"←フラッシュメッセージ flash[:notice] = "投稿しました"と同じ意味
+    redirect_to post_path(post), notice: '投稿しました'
   end
 
   def edit; end
 
   def update
     @post.update!(post_params)
-    redirect_to root_path
+    redirect_to root_path, notice: '更新しました'
   end
 
   def destroy
     @post.destroy!
-    redirect_to root_path
+    redirect_to root_path, notice: '削除しました'
   end
 
   private
