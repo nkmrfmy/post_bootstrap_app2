@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   # before_action メソッド名で only 指定した各アクションの前にメソッドを実行する
-  before_action :set_post, only: %[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy]
 
   def index
     @posts = Post.order(id: :asc)
