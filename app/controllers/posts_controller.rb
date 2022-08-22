@@ -13,16 +13,25 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.create!(post_params)
+    @post = Post.new(post_params)
     # notice: "投稿しました"←フラッシュメッセージ flash[:notice] = "投稿しました"と同じ意味
-    redirect_to post_path(post), notice: '投稿しました'
+    if @post.save
+      redirect_to post_path(post), notice: '投稿しました'
+    else
+      flash.now[:alert] = '投稿に失敗しました'
+      render :new
+    end
   end
 
   def edit; end
 
   def update
-    @post.update!(post_params)
-    redirect_to root_path, notice: '更新しました'
+    if @post.update(post_params)
+      redirect_to root_path, notice: '更新しました'
+    else
+      flash.now[:alert] = '更新に失敗しました'
+      render :edit
+    end
   end
 
   def destroy
